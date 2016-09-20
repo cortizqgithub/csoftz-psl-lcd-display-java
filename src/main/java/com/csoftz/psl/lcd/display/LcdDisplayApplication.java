@@ -20,12 +20,14 @@ import java.util.List;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 
 import com.csoftz.psl.lcd.display.common.LoadTextLine;
+import com.csoftz.psl.lcd.display.service.LcdDisplayService;
 
 /**
  * Main entry location for app.
@@ -39,6 +41,9 @@ public class LcdDisplayApplication {
 
 	private static final Logger log = LoggerFactory.getLogger(LcdDisplayApplication.class);
 
+	@Autowired
+	private LcdDisplayService lcdDisplayService;
+	
 	/**
 	 * Main entry for app.
 	 * 
@@ -72,10 +77,24 @@ public class LcdDisplayApplication {
 				System.out.println("File contentes are:");
 				mvtLines.forEach(s -> System.out.println(s));
 				System.out.println("Processing file starts");
+
+				mvtLines.forEach(l -> {
+					try {
+						lcdDisplayService.initialize(l);
+						List<String> printedLines = lcdDisplayService.printDigits();
+						printedLines.forEach(System.out::println);
+						System.out.println();
+						System.out.println();
+					} catch (Exception e) {
+						System.out.println("Input string [" + l + "] is not well formed, skipped.");
+					}
+				});
+				
 				System.out.println("Processing file ends");
 			} catch (Exception e) {
 				System.out.println("Missing file at " + args[0]);
 			}
+			
 		};
 	}
 }
