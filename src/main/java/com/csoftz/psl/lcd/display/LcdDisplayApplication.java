@@ -43,7 +43,7 @@ public class LcdDisplayApplication {
 
 	@Autowired
 	private LcdDisplayService lcdDisplayService;
-	
+
 	/**
 	 * Main entry for app.
 	 * 
@@ -80,21 +80,23 @@ public class LcdDisplayApplication {
 
 				mvtLines.forEach(l -> {
 					try {
-						lcdDisplayService.initialize(l);
-						List<String> printedLines = lcdDisplayService.printDigits();
-						printedLines.forEach(System.out::println);
-						System.out.println();
-						System.out.println();
+						if (lcdDisplayService.initialize(l)) {
+							List<String> printedLines = lcdDisplayService.printDigits();
+							printedLines.forEach(System.out::println);
+							System.out.println();
+							System.out.println();
+						}
 					} catch (Exception e) {
 						System.out.println("Input string [" + l + "] is not well formed, skipped.");
+						System.out.println(e.getMessage());
 					}
 				});
-				
+
 				System.out.println("Processing file ends");
 			} catch (Exception e) {
 				System.out.println("Missing file at " + args[0]);
 			}
-			
+
 		};
 	}
 }

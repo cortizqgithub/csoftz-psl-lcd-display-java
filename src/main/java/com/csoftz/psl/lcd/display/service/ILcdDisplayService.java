@@ -28,7 +28,7 @@ public interface ILcdDisplayService {
 	/**
 	 * Assign data to process.
 	 * @param data Input data to process. It is in the format of 'n,mn...z' where n, m, z are numbers, and example follows '1,123'.
-	 * @return True if process can continue. It halts when input is '0,0'.
+	 * @return True if process can continue. It halts when input is '0,0', and false is returned.
 	 * @throws Exception
 	 */
 	public Boolean initialize(String data) throws Exception;

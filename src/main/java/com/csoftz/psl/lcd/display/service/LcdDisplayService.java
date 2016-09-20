@@ -162,19 +162,22 @@ public class LcdDisplayService implements ILcdDisplayService {
 		} catch (Exception e) {
 			throw new Exception("Value for input is not well formed");
 		}
-		if (!(size > 1 && size <= 10)) {
+		if (size == 0) {
+			return false;
+		}
+		if (!(size >= 1 && size <= 10)) {
 			throw new Exception("Size input must be a value between 1 and 10");
 		}
 
 		hmFinalTemplateDigits.put(DIGIT_ZERO, generateDigitFrom(size, templateDigitOne));
-		hmFinalTemplateDigits.put(DIGIT_TWO, generateDigitFrom(size, templateDigitOne));
-		hmFinalTemplateDigits.put(DIGIT_THREE, generateDigitFrom(size, templateDigitOne));
-		hmFinalTemplateDigits.put(DIGIT_FOUR, generateDigitFrom(size, templateDigitOne));
-		hmFinalTemplateDigits.put(DIGIT_FIVE, generateDigitFrom(size, templateDigitOne));
-		hmFinalTemplateDigits.put(DIGIT_SIX, generateDigitFrom(size, templateDigitOne));
-		hmFinalTemplateDigits.put(DIGIT_SEVEN, generateDigitFrom(size, templateDigitOne));
-		hmFinalTemplateDigits.put(DIGIT_EIGHT, generateDigitFrom(size, templateDigitOne));
-		hmFinalTemplateDigits.put(DIGIT_NINE, generateDigitFrom(size, templateDigitOne));
+		hmFinalTemplateDigits.put(DIGIT_TWO, generateDigitFrom(size, templateDigitTwo));
+		hmFinalTemplateDigits.put(DIGIT_THREE, generateDigitFrom(size, templateDigitThree));
+		hmFinalTemplateDigits.put(DIGIT_FOUR, generateDigitFrom(size, templateDigitFour));
+		hmFinalTemplateDigits.put(DIGIT_FIVE, generateDigitFrom(size, templateDigitFive));
+		hmFinalTemplateDigits.put(DIGIT_SIX, generateDigitFrom(size, templateDigitSix));
+		hmFinalTemplateDigits.put(DIGIT_SEVEN, generateDigitFrom(size, templateDigitSeven));
+		hmFinalTemplateDigits.put(DIGIT_EIGHT, generateDigitFrom(size, templateDigitEight));
+		hmFinalTemplateDigits.put(DIGIT_NINE, generateDigitFrom(size, templateDigitNine));
 
 		return rslt;
 	}

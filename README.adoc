@@ -82,6 +82,29 @@ To indicate that no more processing is done, use the wildcard line value such as
 When each line is processed it is considered as a printed line, and a blank line must separate each printing.
 For each digit described the column size has a value of *_'Size' + 2_* and the row size is *'2*Size + 3'*.
 
+= Setup
+In order to run the application and as it uses Maven as its build system (but it can also be imported 
+in Eclipse IDE with Maven support, STS recommended), use the following command in terminal to generate 
+the executable package.
+
+[source, terminal]
+----
+$ mvn clean package
+----
+
+If build is successful, then go to 'target' folder where you can find the fat jar to execute the application.
+As it is a Spring Boot fat jar, it execute with the following command in terminal.
+
+[source, terminal]
+----
+$ java -jar csoftz-psl-lcd-display-java-1.0.0.15-RELEASE.jar samples/oneliner.txt
+----
+
+NOTE: In the last sample, the parameter 'samples/oneliner.txt' is the folder where files with
+input data are kept.
+
+And there you go.
+
 
  
 
