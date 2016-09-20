@@ -1,4 +1,87 @@
 = csoftz-psl-lcd-display
 
-V1.0.0.15-Sep.19/2016
+V1.0.0.16-Sep.20/2016
+
+The application prints number in a LCD screen style.
+Thus, the configuration for number for the LCD screen style is as follows:
+
+ - 
+| |
+   
+| |
+ - 
+ 
+   
+  |
+   
+  |
+   
+ 
+ - 
+  |
+ - 
+|  
+ - 
+ 
+ - 
+  |
+ - 
+  |
+ - 
+ 
+   
+| |
+ - 
+  |
+   
+ 
+ - 
+|  
+ - 
+  |
+ - 
+ 
+ - 
+|  
+ - 
+| |
+ - 
+ 
+ - 
+  |
+   
+  |
+   
+ 
+ - 
+| |
+ - 
+| |
+ - 
+ 
+ - 
+| |
+ - 
+  |
+ - 
+ 
+But the application is able to zoom the numbers to a zoom size.
+For the purpose of it, some input files (located in folder samples) are given and thus as this application
+is a console application, that is, uses a terminal to execute (described later), the argument to the 
+application would be the input file to use.
+
+One example of the contents of such a file is as follows:
+2,12345
+3,67890
+0,0
+
+The line is a comma separated number value in which the first one stands for the size of the printing
+(between 1 and 10, named _'Size'_). The second value is the number to display on the LCD screen.
+To indicate that no more processing is done, use the wildcard line value such as 0,0.
+
+When each line is processed it is considered as a printed line, and a blank line must separate each printing.
+For each digit described the column size has a value of *_'Size' + 2_* and the row size is *'2*Size + 3'*.
+
+
+ 
 

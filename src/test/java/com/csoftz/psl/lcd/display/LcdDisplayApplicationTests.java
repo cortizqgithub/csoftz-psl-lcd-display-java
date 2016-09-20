@@ -1,6 +1,6 @@
 /*----------------------------------------------------------------------------*/
-/* Source File:   GLOBALCONSTANTS.JAVA                                        */
-/* Description:   Global Constants used                                       */
+/* Source File:   LCDDISPLAYAPPLICATIONTESTS.JAVA                             */
+/* Description:   Main entry location for app (tests).                        */
 /* Author:        Carlos Adolfo Ortiz Quirós (COQ)                            */
 /* Date:          Sep.19/2016                                                 */
 /* Last Modified: Sep.20/2016                                                 */
@@ -11,21 +11,30 @@
  History
  Sep.19/2016 COQ  File created.
  -----------------------------------------------------------------------------*/
-package com.csoftz.psl.lcd.display.consts;
+
+package com.csoftz.psl.lcd.display;
+
+import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.context.junit4.SpringRunner;
 
 /**
- * Global application constants. Used as a static class access only. This way it
- * is assured that a change in the constant value is modified in one place.
+ * Main entry location for app (test).
  * 
  * @since 1.8(JDK), Sep.19/2016
  * @author Carlos Adolfo Ortiz Quirós (COQ)
- * @version 1.2, Sep.20/2016
+ * @version 1.1, Sep.19/2016
  */
-public class GlobalConstants {
-	public static final String APP_VERSION_NAME = "LCD Display V1.0.0.16 Sep.20/2016";
-	
-	/* Display characters */
-	public static final String HORIZONTAL_SIGN = "-";
-	public static final String VERTICAL_SIGN = "|";
-	public static final String SPACE_SIGN = " "; 
+@RunWith(SpringRunner.class)
+@SpringBootTest
+public class LcdDisplayApplicationTests {
+
+	/**
+	 * Default Spring Boot context test.
+	 */
+	@Test
+	public void contextLoads() {
+	}
+
 }

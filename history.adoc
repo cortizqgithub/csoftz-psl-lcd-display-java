@@ -1,7 +1,10 @@
 File:     history.md
 Author:   Carlos Adolfo Ortiz Q
 Date:     Sep.19/2016
-Modified: Sep.19/2016
+Modified: Sep.20/2016
+
+Sep.20/2016 Tag: V1.0.0.16-Sep.20/2016
+-
 
 Sep.19/2016 Tag: V1.0.0.15-Sep.19/2016
 - Initial commit and project setup.
