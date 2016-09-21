@@ -28,4 +28,5 @@ public class GlobalConstants {
 	public static final String HORIZONTAL_SIGN = "-";
 	public static final String VERTICAL_SIGN = "|";
 	public static final String SPACE_SIGN = " "; 
+	public static final String WILDCARD_SIGN = "x";
 }

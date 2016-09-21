@@ -67,31 +67,33 @@ public class LcdDisplayApplication {
 
 			if (args.length < 1) {
 				System.out.println("No parameters supplied.");
-				System.out.println("Usage: path to file to process");
+				System.out.println("Usage: supply a path to a file to process");
 				return;
 			}
 
 			try {
 				LoadTextLine ltl = new LoadTextLine();
-				List<String> mvtLines = ltl.readAll(args[0]);
+				List<String> mvtLines = ltl.readAll(args[1]);
 				System.out.println("File contentes are:");
 				mvtLines.forEach(s -> System.out.println(s));
 				System.out.println("Processing file starts");
 
-				mvtLines.forEach(l -> {
+				for (String l : mvtLines) {
 					try {
 						if (lcdDisplayService.initialize(l)) {
 							List<String> printedLines = lcdDisplayService.printDigits();
 							printedLines.forEach(System.out::println);
-							System.out.println();
-							System.out.println();
+							System.out.println("  ");
+							System.out.println("  ");
+						}
+						else {
+							break;
 						}
 					} catch (Exception e) {
 						System.out.println("Input string [" + l + "] is not well formed, skipped.");
 						System.out.println(e.getMessage());
 					}
-				});
-
+				}
 				System.out.println("Processing file ends");
 			} catch (Exception e) {
 				System.out.println("Missing file at " + args[0]);
