@@ -73,7 +73,7 @@ public class LcdDisplayApplication {
 
 			try {
 				LoadTextLine ltl = new LoadTextLine();
-				List<String> mvtLines = ltl.readAll(args[1]);
+				List<String> mvtLines = ltl.readAll(args[0]);
 				System.out.println("File contentes are:");
 				mvtLines.forEach(s -> System.out.println(s));
 				System.out.println("Processing file starts");
