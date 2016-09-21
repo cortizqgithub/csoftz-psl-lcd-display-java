@@ -1,10 +1,18 @@
 File:     history.md
 Author:   Carlos Adolfo Ortiz Q
 Date:     Sep.19/2016
-Modified: Sep.20/2016
+Modified: Sep.21/2016
 
-Sep.20/2016 Tag: V1.0.0.16-Sep.20/2016
--
+Sep.21/2016 Tag: V1.0.0.17-Sep.21/2016
+- Completes a first feature-complete.
+- This version but it uses exceptions to validate errors which neglects
+  the real message or purpose of the validation, and when a true exception
+  is raised, it is completely hidden. 
+
+  A tagged version with name 'handle-exceptions' will be created to keep
+  this code. 
+
+  Next is to not use exceptions.
 
 Sep.19/2016 Tag: V1.0.0.15-Sep.19/2016
 - Initial commit and project setup.
