@@ -121,23 +121,6 @@ public class LcdDisplayService implements ILcdDisplayService {
 	private HashMap<String, List<String>> hmFinalTemplateDigits = new HashMap<>();
 
 	/**
-	 * All resizing is accomplished here.
-	 * 
-	 * @param size
-	 *            Zoom Factor.
-	 * @param templatePart
-	 *            Part of LCD digit to zoom.
-	 * @return Zoomed part.
-	 */
-	private String growDigitTemplatePart(int size, final String templatePart) {
-		String rslt = "";
-		if (size == 1) {
-			return templatePart.replace(WILDCARD_SIGN, SPACE_SIGN);
-		}
-		return rslt;
-	}
-
-	/**
 	 * Gets the template LCD digit and zooms to the given size.
 	 * 
 	 * @param size
@@ -151,7 +134,18 @@ public class LcdDisplayService implements ILcdDisplayService {
 		String[] templateLines = digitTemplate.split(",");
 		int i = 0;
 		while (i < templateLines.length) {
-			digitLines.add(growDigitTemplatePart(size, templateLines[i]));
+			String templatePart = templateLines[i].replace(WILDCARD_SIGN, SPACE_SIGN);
+			if (size == 1) {
+				digitLines.add(templatePart);	
+			}
+			else {
+				if (templatePart.contains("-")) {
+					// Insert size - 1 characters after first character with the character at second position in screen.
+					//ici
+					//hoinh
+				}
+			}
+			
 			i++;
 		}
 		return digitLines;
