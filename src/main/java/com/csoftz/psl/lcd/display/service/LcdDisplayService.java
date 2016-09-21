@@ -219,9 +219,11 @@ public class LcdDisplayService implements ILcdDisplayService {
 		for (char ch : inputData.toCharArray()) {
 			List<String> hmValue = hmFinalTemplateDigits.get(String.valueOf(ch));
 			hmActualDigit.put(digitPos, hmValue);
+			digitPos++;
 		}
 		int numKeyValues = hmActualDigit.size();
-		
+		System.out.println("numrows " + numRows);
+		System.out.println("numKeyValues " + numKeyValues);
 		
 		return rslt;
 	}
