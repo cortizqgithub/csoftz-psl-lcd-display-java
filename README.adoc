@@ -1,6 +1,6 @@
 = csoftz-psl-lcd-display
 
-V1.0.0.17-Sep.21/2016
+V1.0.0.18-Sep.21/2016
 
 The application prints number in a LCD screen style.
 Thus, the configuration for number for the LCD screen style is as follows:

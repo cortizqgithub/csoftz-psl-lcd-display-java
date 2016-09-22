@@ -3,6 +3,14 @@ Author:   Carlos Adolfo Ortiz Q
 Date:     Sep.19/2016
 Modified: Sep.21/2016
 
+Sep.21/2016 Tag: V1.0.0.18-Sep.21/2016
+- Application stabilization.
+- Adds missing printing logic.
+  In Previous version only worked with size=1.
+  This next version (since this commit) uses any size from 1 to 10.
+
+  It also adds some more constants.
+
 Sep.21/2016 Tag: V1.0.0.17-Sep.21/2016
 - Completes a first feature-complete.
 - This version but it uses exceptions to validate errors which neglects
