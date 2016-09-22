@@ -24,8 +24,17 @@ import static com.csoftz.psl.lcd.display.consts.DigitConstants.DIGIT_SIX;
 import static com.csoftz.psl.lcd.display.consts.DigitConstants.DIGIT_THREE;
 import static com.csoftz.psl.lcd.display.consts.DigitConstants.DIGIT_TWO;
 import static com.csoftz.psl.lcd.display.consts.DigitConstants.DIGIT_ZERO;
+import static com.csoftz.psl.lcd.display.consts.GlobalConstants.HORIZONTAL_SIGN;
+import static com.csoftz.psl.lcd.display.consts.GlobalConstants.INPUT_SIZE_RANGE_END;
+import static com.csoftz.psl.lcd.display.consts.GlobalConstants.INPUT_SIZE_RANGE_START;
 import static com.csoftz.psl.lcd.display.consts.GlobalConstants.SPACE_SIGN;
+import static com.csoftz.psl.lcd.display.consts.GlobalConstants.VERTICAL_SIGN;
 import static com.csoftz.psl.lcd.display.consts.GlobalConstants.WILDCARD_SIGN;
+import static com.csoftz.psl.lcd.display.consts.MessageConstants.INPUT_DATA_EMPTY;
+import static com.csoftz.psl.lcd.display.consts.MessageConstants.INPUT_DATA_INVALID_CHARS;
+import static com.csoftz.psl.lcd.display.consts.MessageConstants.INPUT_SIZE_INVALID;
+import static com.csoftz.psl.lcd.display.consts.MessageConstants.INPUT_SIZE_NOT_IN_RANGE;
+import static com.csoftz.psl.lcd.display.consts.MessageConstants.NO_DATA_SUPPLIED;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -110,15 +119,41 @@ public class LcdDisplayService implements ILcdDisplayService {
 	private String inputData;
 
 	/**
-	 * Compute how many rows must have the LCD screen with the 'size' or zoom factor.
+	 * Compute how many rows must have the LCD screen with the 'size' or zoom
+	 * factor.
 	 */
 	private Integer numRows;
-	
+
 	/**
 	 * A map with numbers and sized accordingly. The zoom is done after size is
 	 * greater than 1.
 	 */
 	private HashMap<String, List<String>> hmFinalTemplateDigits = new HashMap<>();
+
+	/**
+	 * Insert a specified number of characters in a starting position using a
+	 * data as a basis to work on.
+	 * 
+	 * @param quantity
+	 *            How many characters to insert
+	 * @param offset
+	 *            Where to insert characters
+	 * @param templatePart
+	 *            The data to work on.
+	 * @param sign
+	 *            The character to insert inside data
+	 * @return
+	 */
+	private String insertNumberOfCharsInTemplate(final int quantity, int offset, final String templatePart,
+			final String sign) {
+		StringBuilder sb = new StringBuilder(templatePart);
+		int j = 0;
+		while (j < quantity) {
+			sb.insert(offset, sign);
+			j++;
+		}
+		return sb.toString();
+	}
 
 	/**
 	 * Gets the template LCD digit and zooms to the given size.
@@ -136,16 +171,32 @@ public class LcdDisplayService implements ILcdDisplayService {
 		while (i < templateLines.length) {
 			String templatePart = templateLines[i].replace(WILDCARD_SIGN, SPACE_SIGN);
 			if (size == 1) {
-				digitLines.add(templatePart);	
-			}
-			else {
-				if (templatePart.contains("-")) {
-					// Insert size - 1 characters after first character with the character at second position in screen.
-					//ici
-					//hoinh
+				digitLines.add(templatePart);
+			} else {
+				String buildPart = "";
+				if (templatePart.contains(HORIZONTAL_SIGN)) {
+					// Insert size - 1 characters after first character with the
+					// character at second position in screen.
+					buildPart = insertNumberOfCharsInTemplate(size - 1, 1, templatePart, HORIZONTAL_SIGN);
+					digitLines.add(buildPart);
+				} else {
+					if (templatePart.contains(VERTICAL_SIGN)) {
+						buildPart = insertNumberOfCharsInTemplate(size - 1, 1, templatePart, SPACE_SIGN);
+						int times = 0;
+						while (times < size) {
+							digitLines.add(buildPart);
+							times++;
+						}
+					} else {
+						if (templatePart.contains(SPACE_SIGN)) {
+							// Insert size - 1 characters after first character
+							// with the character at second position in screen.
+							buildPart = insertNumberOfCharsInTemplate(size - 1, 1, templatePart, SPACE_SIGN);
+							digitLines.add(buildPart);
+						}
+					}
 				}
 			}
-			
 			i++;
 		}
 		return digitLines;
@@ -156,10 +207,10 @@ public class LcdDisplayService implements ILcdDisplayService {
 	 */
 	public Boolean initialize(String data) throws Exception {
 		if (data == null) {
-			throw new Exception("No data supplied");
+			throw new Exception(NO_DATA_SUPPLIED);
 		}
 		if (data.equals("")) {
-			throw new Exception("No data supplied");
+			throw new Exception("NO_DATA_SUPPLIED");
 		}
 		Boolean rslt = true;
 		String[] dataValues = data.split(",");
@@ -167,16 +218,16 @@ public class LcdDisplayService implements ILcdDisplayService {
 		try {
 			size = Integer.parseInt(dataValues[0]);
 		} catch (Exception e) {
-			throw new Exception("Value for input size is not well formed");
+			throw new Exception(INPUT_SIZE_INVALID);
 		}
 		if (size == 0) {
 			return false;
 		}
-		if (!(size >= 1 && size <= 10)) {
-			throw new Exception("Size input must be a value between 1 and 10");
+		if (!(size >= INPUT_SIZE_RANGE_START && size <= INPUT_SIZE_RANGE_END)) {
+			throw new Exception(INPUT_SIZE_NOT_IN_RANGE);
 		}
 		if (dataValues[1] == null || dataValues[1].equals("")) {
-			throw new Exception("Data input is empty, cannot process");
+			throw new Exception(INPUT_DATA_EMPTY);
 		}
 
 		// Now it is time to validate the data input parameter that it contains
@@ -184,7 +235,7 @@ public class LcdDisplayService implements ILcdDisplayService {
 		// values of 0 through 9.
 		for (char ch : dataValues[1].toCharArray()) {
 			if (!(ch >= '0' && ch <= '9')) {
-				throw new Exception("Data input does not contain characters [0..9]");
+				throw new Exception(INPUT_DATA_INVALID_CHARS);
 			}
 		}
 
@@ -216,9 +267,9 @@ public class LcdDisplayService implements ILcdDisplayService {
 			digitPos++;
 		}
 		int numKeyValues = hmActualDigit.size();
-		System.out.println("numrows " + numRows);
-		System.out.println("numKeyValues " + numKeyValues);
-		
+		//System.out.println("numrows " + numRows);
+		//System.out.println("numKeyValues " + numKeyValues);
+
 		int rowCounter = 0;
 		String linePart = "";
 		while (rowCounter < numRows) {

@@ -4,8 +4,8 @@
 /*                style. Defines the contract.                                */
 /* Author:        Carlos Adolfo Ortiz Quirós (COQ)                            */
 /* Date:          Sep.20/2016                                                 */
-/* Last Modified: Sep.20/2016                                                 */
-/* Version:       1.1                                                         */
+/* Last Modified: Sep.21/2016                                                 */
+/* Version:       1.2                                                         */
 /* Copyright (c), 2016 CSoftZ                                                 */
 /*----------------------------------------------------------------------------*/
 /*-----------------------------------------------------------------------------
@@ -22,7 +22,7 @@ import java.util.List;
  * 
  * @since 1.8(JDK), Sep.20/2016
  * @author Carlos Adolfo Ortiz Quirós (COQ)
- * @version 1.1, Sep.20/2016
+ * @version 1.2, Sep.21/2016
  */
 public interface ILcdDisplayService {
 	/**
