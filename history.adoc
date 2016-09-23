@@ -1,7 +1,12 @@
 File:     history.md
 Author:   Carlos Adolfo Ortiz Q
-Date:     Sep.19/2016
+Date:     Sep.23/2016
 Modified: Sep.21/2016
+
+Sep.23/2016 Tag: V1.0.0.19-Sep.23/2016
+- Changes to Spring Boot V1.4.1
+- Fixes versioning numbering for artifacts.
+- Functionality is the same.
 
 Sep.21/2016 Tag: V1.0.0.18-Sep.21/2016
 - Application stabilization.

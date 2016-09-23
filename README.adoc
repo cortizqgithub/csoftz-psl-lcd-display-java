@@ -1,6 +1,6 @@
 = csoftz-psl-lcd-display
 
-V1.0.0.18-Sep.21/2016
+V1.0.0.19-Sep.23/2016
 
 The application prints number in a LCD screen style.
 Thus, the configuration for number for the LCD screen style is as follows:
@@ -104,6 +104,9 @@ NOTE: In the last sample, the parameter 'samples/oneliner.txt' is the folder whe
 input data are kept.
 
 And there you go.
+
+= Technology used
+- Spring Boot 1.4.1 (by far uses Spring Framework underneath).
 
 
  
